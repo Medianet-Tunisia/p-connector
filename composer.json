@@ -1,0 +1,56 @@
+{
+    "name": "medianet-dev/p-connector",
+    "description": "Link projects together with restful apis",
+    "keywords": [
+        "medianet-dev",
+        "p-connector"
+    ],
+    "homepage": "https://github.com/medianet-dev/p-connector",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Soufiene Slimi",
+            "email": "soufiene.slimi@medianet.com.tn",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2.5",
+        "illuminate/support": "^7.0",
+        "guzzlehttp/guzzle": "^7.2"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.7",
+        "phpunit/phpunit": "^8.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "MedianetDev\\PConnector\\": "src"
+        },
+        "files": ["src/helpers.php"]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MedianetDev\\PConnector\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MedianetDev\\PConnector\\PConnectorServiceProvider"
+            ],
+            "aliases": {
+                "PConnector": "MedianetDev\\PConnector\\Facade\\PConnector"
+            }
+        }
+    }
+}
