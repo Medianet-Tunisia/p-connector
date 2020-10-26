@@ -7,8 +7,8 @@
 
 <p align="center">
 <a href="https://packagist.org/packages/medianet-dev/p-connector" title="Latest Version on Packagist"><img src="https://img.shields.io/packagist/v/medianet-dev/p-connector.svg"></a>
-<a href="https://travis-ci.org/medianet-dev/p-connector" title="Build Status"><img src="https://img.shields.io/travis/medianet-dev/p-connector/master.svg"></a>
-<a href="https://scrutinizer-ci.com/g/Medianet-Tunisia/p-connector" title="Quality Score"><img src="https://img.shields.io/scrutinizer/quality/g/Medianet-Tunisia/p-connector.svg"></a>
+<a href="https://scrutinizer-ci.com/g/Medianet-Tunisia/p-connector/build-status/master" title="Build Status"><img src="https://scrutinizer-ci.com/g/Medianet-Tunisia/p-connector/badges/build.png?b=master"></a>
+<a href="https://scrutinizer-ci.com/g/Medianet-Tunisia/p-connector" title="Quality Score"><img src="https://img.shields.io/scrutinizer/quality/g/Medianet-Tunisia/p-connector.svg?b=master"></a>
 <a href="https://packagist.org/packages/medianet-dev/p-connector" title="Total Downloads"><img src="https://img.shields.io/packagist/dt/medianet-dev/p-connector.svg"></a>
 </p>
 
