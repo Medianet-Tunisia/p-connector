@@ -19,6 +19,13 @@ class AuthManager
         $this->httpClient = new $httpClient(false);
     }
 
+    /**
+     * Delete token for a profile.
+     *
+     * @param string $profile
+     *
+     * @return void
+     */
     public static function deleteTokenFor($profile)
     {
         if ('basic' !== config('p-connector.profiles.'.$profile.'.auth.auth_method', config('p-connector.auth.auth_method', 'basic'))) {
@@ -29,6 +36,13 @@ class AuthManager
         }
     }
 
+    /**
+     * Get the authentication header for a profile.
+     *
+     * @param string $profile
+     *
+     * @return array
+     */
     public function getAuthenticationHeader($profile)
     {
         $token = $this->getToken($profile);
@@ -48,7 +62,6 @@ class AuthManager
                 throw new InvalidArgumentException(
                     'Invalid method "'.$authMethod.'".'
                 );
-                break;
         }
     }
 
@@ -60,7 +73,7 @@ class AuthManager
     private function getToken($profile)
     {
         if ('basic' === config('p-connector.profiles.'.$profile.'.auth.auth_method', config('p-connector.auth.auth_method', 'basic'))) {
-            $auth = config('p-connector.profiles.'.$profile.'.auth.credentials', []);
+            $auth = config('p-connector.profiles.'.$profile.'.auth.credentials', config('p-connector.auth.credentials', []));
             if (! array_key_exists('username', $auth) || ! array_key_exists('password', $auth)) {
                 throw new InvalidArgumentException(
                     "config('p-connector.profiles.$profile.auth.credentials') array must have a username and password keys."
@@ -87,14 +100,14 @@ class AuthManager
     {
         $result = $this->httpClient->send(
             build_url(config('p-connector.profiles.'.$profile.'.auth.login_path', config('p-connector.auth.login_path', 'login')), $profile),
-            config('p-connector.profiles.'.$profile.'.auth.credentials'),
+            config('p-connector.profiles.'.$profile.'.auth.credentials', config('p-connector.auth.credentials', [])),
             strtoupper(config('p-connector.profiles.'.$profile.'.auth.login_http_method', config('p-connector.auth.login_http_method', 'POST'))),
             $profile,
             false
         );
 
         if ($result['status'] && in_array($result['response']['status_code'], config('p-connector.profiles.'.$profile.'.auth.success_login_code', config('p-connector.auth.success_login_code', [])))) {
-            $token = _get(json_decode($result['response']['body']), explode('.', config('p-connector.profiles.'.$profile.'.auth.token_path', config('p-connector.auth.token_path'))), '');
+            $token = _get(json_decode($result['response']['body']), explode('.', config('p-connector.profiles.'.$profile.'.auth.token_path', config('p-connector.auth.token_path', 'token'))), '');
             if ('string' !== gettype($token)) {
                 throw new InvalidArgumentException('The returned token is not of type string (type: "'.gettype($token).'").');
             }
