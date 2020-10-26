@@ -19,7 +19,7 @@ class PConnectorServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
-        if ($this->app->runningInConsole()) {
+        if ($this->app->runningInConsole() && function_exists('config_path')) {  // function not available and 'publish' not relevant in Lumen
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('p-connector.php'),
             ], 'config');

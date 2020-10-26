@@ -34,11 +34,29 @@ if (! function_exists('build_url')) {
      */
     function build_url(string $path, string $profile): string
     {
-        return (string) config('p-connector.profiles.'.$profile.'.protocol')
-            .'://'.config('p-connector.profiles.'.$profile.'.host')
-            .':'.config('p-connector.profiles.'.$profile.'.port')
-            .(\Str::startsWith(config('p-connector.profiles.'.$profile.'.prefix'), '/') ? '' : '/')
-            .(\Str::endsWith(config('p-connector.profiles.'.$profile.'.prefix'), '/') ? config('p-connector.profiles.'.$profile.'.prefix') : (null != config('p-connector.profiles.'.$profile.'.prefix') ? config('p-connector.profiles.'.$profile.'.prefix').'/' : ''))
-            .(\Str::startsWith($path, '/') ? substr($path, 1) : $path);
+        return (string) config('p-connector.profiles.'.$profile.'.protocol', 'http')
+            .'://'.config('p-connector.profiles.'.$profile.'.host', 'localhost')
+            .':'.config('p-connector.profiles.'.$profile.'.port', 80)
+            .(startsWith(config('p-connector.profiles.'.$profile.'.prefix', ''), '/') ? '' : '/')
+            .(endsWith(config('p-connector.profiles.'.$profile.'.prefix', ''), '/') ?
+                config('p-connector.profiles.'.$profile.'.prefix', '') :
+                (null != config('p-connector.profiles.'.$profile.'.prefix', '') ?
+                    config('p-connector.profiles.'.$profile.'.prefix', '').'/' :
+                    ''
+                )
+            )
+            .(startsWith($path, '/') ? substr($path, 1) : $path);
+    }
+}
+if (! function_exists('startsWith')) {
+    function startsWith($haystack, $needle)
+    {
+        return 0 === substr_compare($haystack, $needle, 0, strlen($needle));
+    }
+}
+if (! function_exists('endsWith')) {
+    function endsWith($haystack, $needle)
+    {
+        return 0 === substr_compare($haystack, $needle, -strlen($needle));
     }
 }
