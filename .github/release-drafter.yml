@@ -3,41 +3,25 @@ tag-template: '$RESOLVED_VERSION'
 categories:
   - title: '🚀 Features'
     labels:
-      - 'Feature'
       - 'feature'
-      - 'Enhancement'
       - 'enhancement'
-      - 'Added'
       - 'added'
-      - 'Add'
       - 'add'
   - title: '🐛 Bug Fixes'
     labels:
-      - 'Fix'
       - 'fix'
-      - 'Bugfix'
       - 'bugfix'
-      - 'Bug'
       - 'bug'
-      - 'Fixed'
       - 'fixed'
   - title: '⚙️ Changes'
     labels:
-      - 'Changed'
       - 'changed'
-      - 'Dependencies'
       - 'dependencies'
-      - 'Update'
       - 'update'
-      - 'Updated'
       - 'updated'
-      - 'Refactor'
       - 'refactor'
-      - 'Refactoring'
       - 'refactoring'
-      - 'Removed'
       - 'removed'
-      - 'Remove'
       - 'remove'
 change-template: '- $TITLE (#$NUMBER - thanks to @$AUTHOR)'
 version-resolver:
@@ -60,7 +44,3 @@ template: |
   ## What’s Changed
 
   $CHANGES
-
-  **Release Date:** <DATE>
-  **Release Engineer:** $CONTRIBUTORS
-  **Previous Release:** $PREVIOUS_TAG
