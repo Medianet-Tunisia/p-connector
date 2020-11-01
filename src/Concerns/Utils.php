@@ -51,6 +51,31 @@ trait Utils
     }
 
     /**
+     * Log the request & response data to the log files if response code is equal to.
+     *
+     * @param int $responseCode
+     *
+     * @return void
+     */
+    public function logIfResponseCodeNot($responseCode)
+    {
+        if ($this->responseCodeNot($responseCode)) {
+            app('log')->debug(
+                '[PConnector: '.$this->profile.'] '.
+                "\n------------------- gateway request --------------------".
+                "\n#Url: ".$this->request['url'].
+                "\n#Method: ".$this->request['method'].
+                "\n#Data: ".json_encode($this->request['payload']).
+                "\n------------------- gateway response -------------------".
+                "\n#Status code: ".$this->response['status_code'].
+                "\n#Headers: ".json_encode($this->response['headers']).
+                "\n#Body: ".(is_string($this->response['body']) ? $this->response['body'] : json_encode($this->response['body'])).
+                "\n--------------------------------------------------------"
+            );
+        }
+    }
+
+    /**
      * Dump the \MedianetDev\PConnector\PConnector using laravel dump function.
      *
      * @return \MedianetDev\PConnector\PConnector
