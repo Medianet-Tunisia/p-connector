@@ -75,7 +75,7 @@ echo '<h1>'.$demo->title.'</h1>';
 # echo '<h1>'.$demo->title.'</h1>';
 ```
 
-We don't have to tell the PConnector witch profile to use if we set the `default_profile` parameter, but if we have more than on profile and we want to switch between them, we can use the `profile()` function like so:
+We don't have to tell the **PConnector** witch profile to use if we set the `default_profile` parameter, but if we have more than on profile and we want to switch between them, we can use the `profile()` function like so:
 
 ```php
 use MedianetDev\PConnector\Facade\PConnector;
