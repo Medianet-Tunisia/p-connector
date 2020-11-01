@@ -59,9 +59,7 @@ class AuthManager
                 return ['Authorization' => 'Bearer '.$token];
 
             default:
-                throw new InvalidArgumentException(
-                    'Invalid method "'.$authMethod.'".'
-                );
+                throw new InvalidArgumentException('Invalid method "'.$authMethod.'".');
         }
     }
 
@@ -75,9 +73,7 @@ class AuthManager
         if ('basic' === config('p-connector.profiles.'.$profile.'.auth.auth_method', config('p-connector.auth.auth_method', 'basic'))) {
             $auth = config('p-connector.profiles.'.$profile.'.auth.credentials', config('p-connector.auth.credentials', []));
             if (! array_key_exists('username', $auth) || ! array_key_exists('password', $auth)) {
-                throw new InvalidArgumentException(
-                    "config('p-connector.profiles.$profile.auth.credentials') array must have a username and password keys."
-                );
+                throw new InvalidArgumentException("config('p-connector.profiles.$profile.auth.credentials') array must have a username and password keys.");
             }
 
             return base64_encode($auth['username'].':'.$auth['password']);
