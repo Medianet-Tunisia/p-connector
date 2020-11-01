@@ -35,26 +35,32 @@ categories:
       - 'refactor'
       - 'Refactoring'
       - 'refactoring'
-  - title: '🗑️ Removed'
-    labels:
       - 'Removed'
       - 'removed'
       - 'Remove'
       - 'remove'
 change-template: '- $TITLE (#$NUMBER - thanks to @$AUTHOR)'
-change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
 version-resolver:
   major:
     labels:
       - 'major'
+      - 'breaking'
   minor:
     labels:
       - 'minor'
+      - 'feature'
   patch:
     labels:
       - 'patch'
+      - 'bugfix'
+      - 'debt'
+      - 'dependencies'
   default: patch
 template: |
   ## What’s Changed
 
   $CHANGES
+
+  **Release Date:** <DATE>
+  **Release Engineer:** $CONTRIBUTORS
+  **Previous Release:** $PREVIOUS_TAG
