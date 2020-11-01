@@ -1,21 +1,3 @@
-name: Release Drafter
-uses: release-drafter/release-drafter@v5.11.0
-
-on:
-  push:
-    # branches to consider in the event; optional, defaults to all
-    branches:
-      - master
-
-jobs:
-  update_release_draft:
-    runs-on: ubuntu-latest
-    steps:
-      # Drafts your next Release notes as Pull Requests are merged into "master"
-      - uses: release-drafter/release-drafter@v5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 name-template: 'v$RESOLVED_VERSION 🌈'
 tag-template: '$RESOLVED_VERSION'
 categories:
@@ -43,6 +25,7 @@ categories:
       - 'removed'
       - 'remove'
 change-template: '- $TITLE (#$NUMBER - thanks to @$AUTHOR)'
+change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
 version-resolver:
   major:
     labels:
