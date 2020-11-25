@@ -33,6 +33,13 @@ trait Requests
     private $errorMessage;
 
     /**
+     * @var array
+     *
+     * Additional headers
+     */
+    private $headers = [];
+
+    /**
      * Send a get request.
      *
      * @param string $path [EX: 'posts']
@@ -131,5 +138,40 @@ trait Requests
     public function getRequestData()
     {
         return $this->request['payload'];
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Setters
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Add additional headers to the request.
+     *
+     * @param array $headers
+     *
+     * @return \MedianetDev\PConnector\PConnector
+     */
+    public function withHeaders(array $headers)
+    {
+        $this->headers = array_merge($this->headers, $headers);
+
+        return $this;
+    }
+
+    /**
+     * Add additional header to the request.
+     *
+     * @param string $key   the header name
+     * @param string $value the header value
+     *
+     * @return \MedianetDev\PConnector\PConnector
+     */
+    public function withHeader(string $key, string $value)
+    {
+        $this->headers = array_merge($this->headers, [$key => $value]);
+
+        return $this;
     }
 }

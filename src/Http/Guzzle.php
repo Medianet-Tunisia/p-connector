@@ -20,10 +20,10 @@ class Guzzle extends BaseHttp
         $this->client = new Client();
     }
 
-    public function post(string $url, array $data, string $profile, bool $withAuth): array
+    public function post(string $url, array $data, string $profile, bool $withAuth, $headers = []): array
     {
         try {
-            $payload = $this->prepareGuzzlePayload($profile, $withAuth);
+            $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
             $payload['json'] = $data;
 
             return $this->parser($url, 'POST', $payload, $this->client->post($url, $payload));
@@ -32,10 +32,10 @@ class Guzzle extends BaseHttp
         }
     }
 
-    public function get(string $url, array $data, string $profile, bool $withAuth): array
+    public function get(string $url, array $data, string $profile, bool $withAuth, $headers = []): array
     {
         try {
-            $payload = $this->prepareGuzzlePayload($profile, $withAuth);
+            $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
             $payload['query'] = $data;
 
             return $this->parser($url, 'GET', $payload, $this->client->get($url, $payload));
@@ -44,10 +44,10 @@ class Guzzle extends BaseHttp
         }
     }
 
-    public function put(string $url, array $data, string $profile, bool $withAuth): array
+    public function put(string $url, array $data, string $profile, bool $withAuth, $headers = []): array
     {
         try {
-            $payload = $this->prepareGuzzlePayload($profile, $withAuth);
+            $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
             $payload['json'] = $data;
 
             return $this->parser($url, 'PUT', $payload, $this->client->put($url, $payload));
@@ -56,10 +56,10 @@ class Guzzle extends BaseHttp
         }
     }
 
-    public function patch(string $url, array $data, string $profile, bool $withAuth): array
+    public function patch(string $url, array $data, string $profile, bool $withAuth, $headers = []): array
     {
         try {
-            $payload = $this->prepareGuzzlePayload($profile, $withAuth);
+            $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
             $payload['json'] = $data;
 
             return $this->parser($url, 'PATCH', $payload, $this->client->put($url, $payload));
@@ -68,10 +68,10 @@ class Guzzle extends BaseHttp
         }
     }
 
-    public function delete(string $url, array $data, string $profile, bool $withAuth): array
+    public function delete(string $url, array $data, string $profile, bool $withAuth, $headers = []): array
     {
         try {
-            $payload = $this->prepareGuzzlePayload($profile, $withAuth);
+            $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
             $payload['json'] = $data;
 
             return $this->parser($url, 'DELETE', $payload, $this->client->delete($url, $payload));
@@ -107,29 +107,30 @@ class Guzzle extends BaseHttp
      *
      * @param string $profile
      * @param bool   $withAuth
+     * @param array  $headers
      *
      * @return array
      */
-    protected function prepareGuzzlePayload($profile, $withAuth)
+    protected function prepareGuzzlePayload($profile, $withAuth, $headers)
     {
-        $payload['headers'] = config(
-            'p-connector.profiles.'.$profile.'.request.headers.',
-            config('p-connector.request.headers.', ['Accept' => 'application/json'])
-        );
+        $payload['headers'] = array_merge(config(
+            'p-connector.profiles.'.$profile.'.request.headers',
+            config('p-connector.request.headers', ['Accept' => 'application/json'])
+        ), $headers);
         if ($withAuth) {
             $payload['headers'] = array_merge($payload['headers'], $this->authManager->getAuthenticationHeader($profile));
         }
         $payload['http_errors'] = config(
             'p-connector.profiles.'.$profile.'.request.http_errors',
-            config('p-connector.request.http_errors.', false)
+            config('p-connector.request.http_errors', false)
         );
         $payload['connect_timeout'] = config(
-            'p-connector.profiles.'.$profile.'.request.connect_timeout.',
-            config('p-connector.request.connect_timeout.', 3)
+            'p-connector.profiles.'.$profile.'.request.connect_timeout',
+            config('p-connector.request.connect_timeout', 3)
         );
         $payload['timeout'] = config(
-            'p-connector.profiles.'.$profile.'.request.timeout.',
-            config('p-connector.request.timeout.', 3)
+            'p-connector.profiles.'.$profile.'.request.timeout',
+            config('p-connector.request.timeout', 3)
         );
 
         return $payload;
