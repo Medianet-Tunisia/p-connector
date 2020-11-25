@@ -19,19 +19,19 @@ abstract class BaseHttp implements Http
         $this->authManager = $withAuth ? new AuthManager() : null;
     }
 
-    public function send(string $url, array $data, string $method, string $profile, bool $withAuth): array
+    public function send(string $url, array $data, string $method, string $profile, bool $withAuth, array $headers = []): array
     {
         switch (strtoupper($method)) {
             case 'POST':
-                return $this->post($url, $data, $profile, $withAuth);
+                return $this->post($url, $data, $profile, $withAuth, $headers);
             case 'GET':
-                return $this->get($url, $data, $profile, $withAuth);
+                return $this->get($url, $data, $profile, $withAuth, $headers);
             case 'PUT':
-                return $this->put($url, $data, $profile, $withAuth);
+                return $this->put($url, $data, $profile, $withAuth, $headers);
             case 'PATCH':
-                return $this->patch($url, $data, $profile, $withAuth);
+                return $this->patch($url, $data, $profile, $withAuth, $headers);
             case 'DELETE':
-                return $this->delete($url, $data, $profile, $withAuth);
+                return $this->delete($url, $data, $profile, $withAuth, $headers);
 
             default:
                 throw new \InvalidArgumentException(

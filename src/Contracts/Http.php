@@ -12,10 +12,11 @@ interface Http
      * @param string $method   one of those values: POST, GET, PUT, DELETE
      * @param string $profile  one used profile
      * @param bool   $withAuth authenticate or not
+     * @param array  $headers  additional headers
      *
      * @return array
      */
-    public function send(string $url, array $data, string $method, string $profile, bool $withAuth): array;
+    public function send(string $url, array $data, string $method, string $profile, bool $withAuth, array $headers = []): array;
 
     /**
      * Send a post request.
@@ -24,10 +25,11 @@ interface Http
      * @param array  $data     the data to be sent
      * @param string $profile  the used profile
      * @param bool   $withAuth authenticate or not
+     * @param array  $headers  additional headers
      *
      * @return array
      */
-    public function post(string $url, array $data, string $profile, bool $withAuth): array;
+    public function post(string $url, array $data, string $profile, bool $withAuth, array $headers = []): array;
 
     /**
      * Send a get request.
@@ -36,10 +38,11 @@ interface Http
      * @param array  $data     the data to be sent
      * @param string $profile  the used profile
      * @param bool   $withAuth authenticate or not
+     * @param array  $headers  additional headers
      *
      * @return array
      */
-    public function get(string $url, array $data, string $profile, bool $withAuth): array;
+    public function get(string $url, array $data, string $profile, bool $withAuth, array $headers = []): array;
 
     /**
      * Send a put request.
@@ -48,10 +51,11 @@ interface Http
      * @param array  $data     the data to be sent
      * @param string $profile  the used profile
      * @param bool   $withAuth authenticate or not
+     * @param array  $headers  additional headers
      *
      * @return array
      */
-    public function put(string $url, array $data, string $profile, bool $withAuth): array;
+    public function put(string $url, array $data, string $profile, bool $withAuth, array $headers = []): array;
 
     /**
      * Send a patch request.
@@ -60,10 +64,11 @@ interface Http
      * @param array  $data     the data to be sent
      * @param string $profile  the used profile
      * @param bool   $withAuth authenticate or not
+     * @param array  $headers  additional headers
      *
      * @return array
      */
-    public function patch(string $url, array $data, string $profile, bool $withAuth): array;
+    public function patch(string $url, array $data, string $profile, bool $withAuth, array $headers = []): array;
 
     /**
      * Send a delete request.
@@ -72,8 +77,9 @@ interface Http
      * @param array  $data     the data to be sent
      * @param string $profile  the used profile
      * @param bool   $withAuth authenticate or not
+     * @param array  $headers  additional headers
      *
      * @return array
      */
-    public function delete(string $url, array $data, string $profile, bool $withAuth): array;
+    public function delete(string $url, array $data, string $profile, bool $withAuth, array $headers = []): array;
 }

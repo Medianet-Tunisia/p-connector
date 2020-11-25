@@ -37,14 +37,14 @@ class PConnector
      */
     public function send(string $path = '', array $data = [], string $method = 'GET')
     {
-        $this->loadResponse($this->httpClient->send(build_url($path, $this->profile), $data, $method, $this->profile, $this->withAuthentication));
+        $this->loadResponse($this->httpClient->send(build_url($path, $this->profile), $data, $method, $this->profile, $this->withAuthentication, $this->headers));
 
         if ($this->status &&
                 $this->withAuthentication &&
                 in_array($this->response['status_code'], config('p-connector.profiles.'.$this->profile.'.auth.re_auth_on_codes', config('p-connector.auth.re_auth_on_codes', [401])))
         ) {
             AuthManager::deleteTokenFor($this->profile);
-            $this->loadResponse($this->httpClient->send(build_url($path, $this->profile), $data, $method, $this->profile, $this->withAuthentication));
+            $this->loadResponse($this->httpClient->send(build_url($path, $this->profile), $data, $method, $this->profile, $this->withAuthentication, $this->headers));
         }
 
         if ($this->allowDebugging) {
