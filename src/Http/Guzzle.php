@@ -94,6 +94,12 @@ class Guzzle extends BaseHttp
                 'headers' => $response->getHeaders(),
                 'body' => $response->getBody()->getContents(),
             ];
+        } else {
+            $result['response'] = [
+                'status_code' => 0,
+                'headers' => [],
+                'body' => '{}',
+            ];
         }
         if (! is_null($errorMessage)) {
             $result['error_message'] = $errorMessage;

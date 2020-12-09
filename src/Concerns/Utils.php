@@ -13,19 +13,16 @@ trait Utils
         $this->request = $data['request'];
         $this->errorMessage = $this->status ? null : $data['error_message'];
 
-        if ($this->status) {
-            $this->response = $data['response'];
-            switch ($this->decodeResponse) {
-                case 'object':
-                    $this->response['body'] = json_decode($data['response']['body']);
-                    break;
-                case 'array':
-                    $this->response['body'] = json_decode($data['response']['body'], true);
-                    break;
-
-                default:
-                    break;
-            }
+        $this->response = $data['response'];
+        switch ($this->decodeResponse) {
+            case 'object':
+                $this->response['body'] = json_decode($data['response']['body']);
+                break;
+            case 'array':
+                $this->response['body'] = json_decode($data['response']['body'], true);
+                break;
+            default:
+                break;
         }
     }
 
@@ -46,6 +43,7 @@ trait Utils
             "\n#Status code: ".$this->response['status_code'].
             "\n#Headers: ".json_encode($this->response['headers']).
             "\n#Body: ".(is_string($this->response['body']) ? $this->response['body'] : json_encode($this->response['body'])).
+            "\n#Error: ".($this->errorMessage ? $this->errorMessage : 'none').
             "\n--------------------------------------------------------"
         );
     }
@@ -60,18 +58,7 @@ trait Utils
     public function logIfResponseCodeNot($responseCode)
     {
         if ($this->responseCodeNot($responseCode)) {
-            app('log')->debug(
-                '[PConnector: '.$this->profile.'] '.
-                "\n------------------- gateway request --------------------".
-                "\n#Url: ".$this->request['url'].
-                "\n#Method: ".$this->request['method'].
-                "\n#Data: ".json_encode($this->request['payload']).
-                "\n------------------- gateway response -------------------".
-                "\n#Status code: ".$this->response['status_code'].
-                "\n#Headers: ".json_encode($this->response['headers']).
-                "\n#Body: ".(is_string($this->response['body']) ? $this->response['body'] : json_encode($this->response['body'])).
-                "\n--------------------------------------------------------"
-            );
+            $this->log();
         }
     }
 
