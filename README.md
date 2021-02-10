@@ -245,15 +245,15 @@ Example 2:
 ```php
 use MedianetDev\PConnector\Facade\PConnector;
 
-$demo = PConnector::withLog()->get('posts/1')->dump();
+$demo = PConnector::withLog()->get('posts/1');
 ```
 
 #### Debugging
-You can debug the **PConnector** object using the `debug()` method.
+You can debug the **PConnector** object using the `dump()` method.
 ```php
 use MedianetDev\PConnector\Facade\PConnector;
 
-$demo = PConnector::get('posts/1')->debug();
+$demo = PConnector::get('posts/1')->dump();
 ```
 
 ### Changelog
