@@ -149,6 +149,8 @@ $demo = PConnector::profile('demo')->withoutAuth()->get('posts/1');
 'request' => [ // [AAPS]
     // The default request headers
     'headers' => ['Accept' => 'application/json'],
+    // Whether to send the language through the header by default or not
+    'enable_localization' => true,
     // Handle http errors or not
     'http_errors' => false,
     // Http connect timeout value
@@ -157,7 +159,16 @@ $demo = PConnector::profile('demo')->withoutAuth()->get('posts/1');
     'timeout' => 3,
 ],
 ```
-This is the list of getters available for the request:
+##### Localization
+Send **Accept-Language** header when needed:
+```php
+use MedianetDev\PConnector\Facade\PConnector;
+
+$demo = PConnector::lang('ar')->get('posts/1');
+```
+Or configure the **PConnector** to send it automatically via the configuration file.
+
+##### This is the list of getters available for the request:
 * getRequestUrl()
 * getRequestMethod()
 * getRequestData()

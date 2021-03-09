@@ -60,6 +60,20 @@ trait Configurations
     }
 
     /**
+     * Send language using the app locale through the Accept-Language header.
+     *
+     * @param string $locale [optional] The locale will default to the app.locale if not provided
+     *
+     * @return \MedianetDev\PConnector\PConnector
+     */
+    public function lang(string $locale = null)
+    {
+        $this->withHeader('Accept-Language', $locale ?? app()->getLocale());
+
+        return $this;
+    }
+
+    /**
      * Use authentication for this request.
      *
      * @return \MedianetDev\PConnector\PConnector

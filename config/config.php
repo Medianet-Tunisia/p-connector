@@ -49,6 +49,8 @@ return [
     'request' => [ // [AAPS]
         // The default request headers
         'headers' => ['Accept' => 'application/json'],
+        // Whether to send the language through the header by default or not
+        'enable_localization' => true,
         // Handle http errors or not
         'http_errors' => false,
         // Http connect timeout value
