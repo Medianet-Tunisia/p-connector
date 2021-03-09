@@ -84,6 +84,9 @@ trait Utils
      */
     public function getAttribute($attribute, $default = null)
     {
+        if ($this->status === 0) {
+            return $default;
+        }
         if ('object' !== gettype($this->response['body'])) {
             throw new \BadMethodCallException(
                 'You can use the get() function only if you are parsing the response as object, your response body type is: '.
@@ -117,6 +120,6 @@ trait Utils
 
     public function __get($name)
     {
-        return $this->response['body']->{$name};
+        return $this->status ? $this->response['body']->{$name} : null;
     }
 }

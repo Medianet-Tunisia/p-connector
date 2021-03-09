@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static \MedianetDev\PConnector\PConnector withoutAuth()
  * @method static \MedianetDev\PConnector\PConnector withLog()
  * @method static \MedianetDev\PConnector\PConnector withoutLog()
+ * @method static \MedianetDev\PConnector\PConnector withHeaders(array $headers)
+ * @method static \MedianetDev\PConnector\PConnector withHeader(string $key, string $value)
  * @method static \MedianetDev\PConnector\PConnector lang(string $locale = null)
  * @method static \MedianetDev\PConnector\PConnector objectResponse()
  * @method static \MedianetDev\PConnector\PConnector htmlResponse()
