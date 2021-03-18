@@ -15,6 +15,9 @@ if (! function_exists('_get')) {
         if (count($attribute) > 1) {
             $object2 = $object->{$attribute[0]} ?? [];
             array_shift($attribute);
+            if (gettype($object2) !== 'object') {
+                return $default;
+            }
 
             return _get($object2, $attribute, $default);
         } else {
