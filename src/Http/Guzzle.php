@@ -24,7 +24,7 @@ class Guzzle extends BaseHttp
     {
         try {
             $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
-            $payload['json'] = $data;
+            $payload[config('p-connector.profiles.'.$profile.'.request.post_data', config('p-connector.request.post_data', 'json'))] = $data;
 
             return $this->parser($url, 'POST', $payload, $this->client->post($url, $payload));
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
@@ -48,7 +48,7 @@ class Guzzle extends BaseHttp
     {
         try {
             $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
-            $payload['json'] = $data;
+            $payload[config('p-connector.profiles.'.$profile.'.request.post_data', config('p-connector.request.post_data', 'json'))] = $data;
 
             return $this->parser($url, 'PUT', $payload, $this->client->put($url, $payload));
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
@@ -60,7 +60,7 @@ class Guzzle extends BaseHttp
     {
         try {
             $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
-            $payload['json'] = $data;
+            $payload[config('p-connector.profiles.'.$profile.'.request.post_data', config('p-connector.request.post_data', 'json'))] = $data;
 
             return $this->parser($url, 'PATCH', $payload, $this->client->put($url, $payload));
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
@@ -72,7 +72,7 @@ class Guzzle extends BaseHttp
     {
         try {
             $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
-            $payload['json'] = $data;
+            $payload[config('p-connector.profiles.'.$profile.'.request.post_data', config('p-connector.request.post_data', 'json'))] = $data;
 
             return $this->parser($url, 'DELETE', $payload, $this->client->delete($url, $payload));
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {

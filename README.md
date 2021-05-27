@@ -156,6 +156,8 @@ $demo = PConnector::profile('demo')->withoutAuth()->get('posts/1');
     'connect_timeout' => 3,
     // Http timeout value
     'timeout' => 3,
+    // The data type; json, form-data, ...
+    'post_data' => 'json',
 ],
 ```
 ##### Localization
