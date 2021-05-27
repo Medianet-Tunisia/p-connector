@@ -57,6 +57,8 @@ return [
         'connect_timeout' => 3,
         // Http timeout value
         'timeout' => 3,
+        // The data type; json, form-data, ...
+        'post_data' => 'json',
     ],
     // Log requests & responses to log files or not (you can make an exception with withLog() and withoutLog() methods)
     'log' => false, // [AAPS]
