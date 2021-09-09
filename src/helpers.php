@@ -32,23 +32,27 @@ if (! function_exists('build_url')) {
      *
      * @param string $path    The path
      * @param string $profile The profile name
+     * @param string $url The new url
      *
      * @return string
      */
-    function build_url(string $path, string $profile): string
+    function build_url(string $path, string $profile, string $url = null): string
     {
-        return (string) config('p-connector.profiles.'.$profile.'.protocol', 'http')
+        return (string) (
+            $url ? (endsWith($url, '/') ? $url : $url.'/')  : config('p-connector.profiles.'.$profile.'.protocol', 'http')
             .'://'.config('p-connector.profiles.'.$profile.'.host', 'localhost')
             .':'.config('p-connector.profiles.'.$profile.'.port', 80)
             .(startsWith(config('p-connector.profiles.'.$profile.'.prefix', ''), '/') ? '' : '/')
-            .(endsWith(config('p-connector.profiles.'.$profile.'.prefix', ''), '/') ?
+            .(
+                endsWith(config('p-connector.profiles.'.$profile.'.prefix', ''), '/') ?
                 config('p-connector.profiles.'.$profile.'.prefix', '') :
-                (null != config('p-connector.profiles.'.$profile.'.prefix', '') ?
+                (
+                    null != config('p-connector.profiles.'.$profile.'.prefix', '') ?
                     config('p-connector.profiles.'.$profile.'.prefix', '').'/' :
                     ''
                 )
             )
-            .(startsWith($path, '/') ? substr($path, 1) : $path);
+        ).(startsWith($path, '/') ? substr($path, 1) : $path);
     }
 }
 if (! function_exists('startsWith')) {
