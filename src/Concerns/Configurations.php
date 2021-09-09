@@ -32,6 +32,14 @@ trait Configurations
      */
     private $decodeResponse;
 
+
+    /**
+     * @var string
+     *
+     * The url for the current used profile.
+     */
+    private $url;
+
     private function updateSettings($profile)
     {
         $this->withAuthentication = config('p-connector.profiles.'.$profile.'.auth.authenticate_by_default', config('p-connector.auth.authenticate_by_default', false));
@@ -155,5 +163,34 @@ trait Configurations
         $this->decodeResponse = 'array';
 
         return $this;
+    }
+
+
+    /**
+     * Change the url for the current used profile.
+     *
+     * @param string $url The new url
+     *
+     * @return \MedianetDev\PConnector\PConnector
+     */
+    public function url(string $url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+
+    /**
+     * Change the url for the current used profile.
+     * This is an alias for url() function
+     *
+     * @param string $url The new url
+     *
+     * @return \MedianetDev\PConnector\PConnector
+     */
+    public function setUrl(string $url)
+    {
+        return $this->url($url);
     }
 }
