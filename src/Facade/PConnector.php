@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static \MedianetDev\PConnector\PConnector patch(string $path = '', array $data = [])
  * @method static \MedianetDev\PConnector\PConnector delete(string $path = '', array $data = [])
  * @method static \MedianetDev\PConnector\PConnector profile(string $profile)                                          It's **RECOMMENDED** to use the profile before using any other setting function to not override any setting
+ * @method static \MedianetDev\PConnector\PConnector url(string $url)
+ * @method static \MedianetDev\PConnector\PConnector setUrl(string $url)
  * @method static \MedianetDev\PConnector\PConnector withAuth()
  * @method static \MedianetDev\PConnector\PConnector withoutAuth()
  * @method static \MedianetDev\PConnector\PConnector withLog()

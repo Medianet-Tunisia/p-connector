@@ -169,6 +169,12 @@ $demo = PConnector::lang('ar')->get('posts/1');
 ```
 Or configure the **PConnector** to send it automatically via the configuration file.
 
+##### Quickly change the current url
+```php
+PConnector::url('https://jsonplaceholder.typicode.com')->get('todos')
+```
+Or you can use tha alias setUrl() method
+
 ##### This is the list of getters available for the request:
 * getRequestUrl()
 * getRequestMethod()
