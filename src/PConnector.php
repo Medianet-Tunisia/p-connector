@@ -29,13 +29,12 @@ class PConnector
     /**
      * Send a request.
      *
-     * @param string $path   [EX: 'posts']
-     * @param array  $data   The query data
-     * @param string $method
-     *
+     * @param  string  $path  [EX: 'posts']
+     * @param  array|string  $data  The query data
+     * @param  string  $method
      * @return \MedianetDev\PConnector\PConnector
      */
-    public function send(string $path = '', array $data = [], string $method = 'GET')
+    public function send(string $path = '', $data = [], string $method = 'GET')
     {
         if (config('p-connector.profiles.'.$this->profile.'.request.enable_localization', config('p-connector.request.enable_localization', true)) && ! array_key_exists('Accept-Language', $this->headers)) {
             $this->lang();
