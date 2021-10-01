@@ -131,10 +131,9 @@ class Guzzle extends BaseHttp
     /**
      * Build the guzzle payload.
      *
-     * @param string $profile
-     * @param bool   $withAuth
-     * @param array  $headers
-     *
+     * @param  string  $profile
+     * @param  bool  $withAuth
+     * @param  array  $headers
      * @return array
      */
     protected function prepareGuzzlePayload($profile, $withAuth, $headers)

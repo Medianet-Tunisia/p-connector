@@ -42,9 +42,8 @@ trait Requests
     /**
      * Send a get request.
      *
-     * @param string       $path [EX: 'posts']
-     * @param array|string $data The query data
-     *
+     * @param  string  $path  [EX: 'posts']
+     * @param  array|string  $data  The query data
      * @return \MedianetDev\PConnector\PConnector
      */
     public function get(string $path = '', $data = [])
@@ -55,9 +54,8 @@ trait Requests
     /**
      * Send a post request.
      *
-     * @param string       $path [EX: 'posts']
-     * @param array|string $data The query data
-     *
+     * @param  string  $path  [EX: 'posts']
+     * @param  array|string  $data  The query data
      * @return \MedianetDev\PConnector\PConnector
      */
     public function post(string $path = '', $data = [])
@@ -68,9 +66,8 @@ trait Requests
     /**
      * Send a put request.
      *
-     * @param string       $path [EX: 'posts']
-     * @param array|string $data The query data
-     *
+     * @param  string  $path  [EX: 'posts']
+     * @param  array|string  $data  The query data
      * @return \MedianetDev\PConnector\PConnector
      */
     public function put(string $path = '', $data = [])
@@ -81,9 +78,8 @@ trait Requests
     /**
      * Send a patch request.
      *
-     * @param string       $path [EX: 'posts']
-     * @param array|string $data The query data
-     *
+     * @param  string  $path  [EX: 'posts']
+     * @param  array|string  $data  The query data
      * @return \MedianetDev\PConnector\PConnector
      */
     public function patch(string $path = '', $data = [])
@@ -94,9 +90,8 @@ trait Requests
     /**
      * Send a delete request.
      *
-     * @param string       $path [EX: 'posts']
-     * @param array|string $data The query data
-     *
+     * @param  string  $path  [EX: 'posts']
+     * @param  array|string  $data  The query data
      * @return \MedianetDev\PConnector\PConnector
      */
     public function delete(string $path = '', $data = [])
@@ -149,8 +144,7 @@ trait Requests
     /**
      * Add additional headers to the request.
      *
-     * @param array $headers
-     *
+     * @param  array  $headers
      * @return \MedianetDev\PConnector\PConnector
      */
     public function withHeaders(array $headers)
@@ -163,9 +157,8 @@ trait Requests
     /**
      * Add additional header to the request.
      *
-     * @param string $key   the header name
-     * @param string $value the header value
-     *
+     * @param  string  $key  the header name
+     * @param  string  $value  the header value
      * @return \MedianetDev\PConnector\PConnector
      */
     public function withHeader(string $key, string $value)
