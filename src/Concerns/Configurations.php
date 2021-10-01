@@ -32,7 +32,6 @@ trait Configurations
      */
     private $decodeResponse;
 
-
     /**
      * @var string
      *
@@ -52,8 +51,7 @@ trait Configurations
      *
      * It's **RECOMMENDED** to use the profile before using any other setting function to not override any setting
      *
-     * @param string $profile The profile name
-     *
+     * @param  string  $profile  The profile name
      * @return \MedianetDev\PConnector\PConnector
      */
     public function profile(string $profile)
@@ -70,8 +68,7 @@ trait Configurations
     /**
      * Send language using the app locale through the Accept-Language header.
      *
-     * @param string $locale [optional] The locale will default to the app.locale if not provided
-     *
+     * @param  string  $locale  [optional] The locale will default to the app.locale if not provided
      * @return \MedianetDev\PConnector\PConnector
      */
     public function lang(string $locale = null)
@@ -165,12 +162,10 @@ trait Configurations
         return $this;
     }
 
-
     /**
      * Change the url for the current used profile.
      *
-     * @param string $url The new url
-     *
+     * @param  string  $url  The new url
      * @return \MedianetDev\PConnector\PConnector
      */
     public function url(string $url)
@@ -180,13 +175,11 @@ trait Configurations
         return $this;
     }
 
-
     /**
      * Change the url for the current used profile.
-     * This is an alias for url() function
+     * This is an alias for url() function.
      *
-     * @param string $url The new url
-     *
+     * @param  string  $url  The new url
      * @return \MedianetDev\PConnector\PConnector
      */
     public function setUrl(string $url)

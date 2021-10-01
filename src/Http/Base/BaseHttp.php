@@ -42,13 +42,12 @@ abstract class BaseHttp implements Http
     /**
      * Return the sent request data and the response with a status to indicate if the is an error or not.
      *
-     * @param string $url
-     * @param string $method
-     * @param array  $payload
-     * @param mixed  $response
-     * @param bool   $status
-     * @param string $errorMessage
-     *
+     * @param  string  $url
+     * @param  string  $method
+     * @param  array  $payload
+     * @param  mixed  $response
+     * @param  bool  $status
+     * @param  string  $errorMessage
      * @return array
      */
     abstract protected function parser(string $url, string $method, array $payload, $response, bool $status = true, string $errorMessage = null): array;

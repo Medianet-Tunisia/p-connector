@@ -29,10 +29,9 @@ class PConnector
     /**
      * Send a request.
      *
-     * @param string       $path   [EX: 'posts']
-     * @param array|string $data   The query data
-     * @param string       $method
-     *
+     * @param  string  $path  [EX: 'posts']
+     * @param  array|string  $data  The query data
+     * @param  string  $method
      * @return \MedianetDev\PConnector\PConnector
      */
     public function send(string $path = '', $data = [], string $method = 'GET')

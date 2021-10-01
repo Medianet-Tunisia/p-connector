@@ -51,8 +51,7 @@ trait Utils
     /**
      * Log the request & response data to the log files if response code is equal to.
      *
-     * @param int $responseCode
-     *
+     * @param  int  $responseCode
      * @return void
      */
     public function logIfResponseCodeNot($responseCode)
@@ -85,9 +84,8 @@ trait Utils
     /**
      * Get attribute from the response.
      *
-     * @param string $attribute The attribute path, for nested attributes use the "." separator [EX: "profile.name"]
-     * @param mixed  $default   The fallback value if the attribute is not on the response object
-     *
+     * @param  string  $attribute  The attribute path, for nested attributes use the "." separator [EX: "profile.name"]
+     * @param  mixed  $default  The fallback value if the attribute is not on the response object
      * @return mixed
      */
     public function getAttribute($attribute, $default = null)
