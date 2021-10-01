@@ -7,6 +7,8 @@
 <p align="center">
 <a href="https://packagist.org/packages/medianet-dev/p-connector" title="Latest Version on Packagist"><img src="https://img.shields.io/packagist/v/medianet-dev/p-connector.svg"></a>
 <a href="https://www.travis-ci.com/Medianet-Tunisia/p-connector" title="Build Status"><img src="https://www.travis-ci.com/Medianet-Tunisia/p-connector.svg?branch=master"></a>
+<!-- Add style ci badge -->
+<a href="https://github.styleci.io/repos/307140166?branch=master" title="StyleCI"><img alt="StyleCI" src="https://github.styleci.io/repos/307140166/shield?style=flat&branch=master"></a>
 <a href="https://scrutinizer-ci.com/g/Medianet-Tunisia/p-connector" title="Quality Score"><img src="https://img.shields.io/scrutinizer/quality/g/Medianet-Tunisia/p-connector.svg?b=master"></a>
 <a href="https://packagist.org/packages/medianet-dev/p-connector" title="Total Downloads"><img src="https://img.shields.io/packagist/dt/medianet-dev/p-connector.svg"></a>
 </p>
