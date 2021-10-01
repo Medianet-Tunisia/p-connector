@@ -8,7 +8,7 @@ interface Http
      * Send diver requests.
      *
      * @param  string  $url  the url where to send the request
-     * @param  array  $data  the data to be sent
+     * @param  array|string  $data  the data to be sent
      * @param  string  $method  one of those values: POST, GET, PUT, DELETE
      * @param  string  $profile  one used profile
      * @param  bool  $withAuth  authenticate or not
