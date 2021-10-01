@@ -16,70 +16,70 @@ interface Http
      *
      * @return array
      */
-    public function send(string $url, array $data, string $method, string $profile, bool $withAuth, array $headers = []): array;
+    public function send(string $url, $data, string $method, string $profile, bool $withAuth, array $headers = []): array;
 
     /**
      * Send a post request.
      *
-     * @param string $url      the url where to send the request
-     * @param array  $data     the data to be sent
-     * @param string $profile  the used profile
-     * @param bool   $withAuth authenticate or not
-     * @param array  $headers  additional headers
+     * @param string       $url      the url where to send the request
+     * @param array|string $data     the data to be sent
+     * @param string       $profile  the used profile
+     * @param bool         $withAuth authenticate or not
+     * @param array        $headers  additional headers
      *
      * @return array
      */
-    public function post(string $url, array $data, string $profile, bool $withAuth, array $headers = []): array;
+    public function post(string $url, $data, string $profile, bool $withAuth, array $headers = []): array;
 
     /**
      * Send a get request.
      *
-     * @param string $url      the url where to send the request
-     * @param array  $data     the data to be sent
-     * @param string $profile  the used profile
-     * @param bool   $withAuth authenticate or not
-     * @param array  $headers  additional headers
+     * @param string       $url      the url where to send the request
+     * @param array|string $data     the data to be sent
+     * @param string       $profile  the used profile
+     * @param bool         $withAuth authenticate or not
+     * @param array        $headers  additional headers
      *
      * @return array
      */
-    public function get(string $url, array $data, string $profile, bool $withAuth, array $headers = []): array;
+    public function get(string $url, $data, string $profile, bool $withAuth, array $headers = []): array;
 
     /**
      * Send a put request.
      *
-     * @param string $url      the url where to send the request
-     * @param array  $data     the data to be sent
-     * @param string $profile  the used profile
-     * @param bool   $withAuth authenticate or not
-     * @param array  $headers  additional headers
+     * @param string       $url      the url where to send the request
+     * @param array|string $data     the data to be sent
+     * @param string       $profile  the used profile
+     * @param bool         $withAuth authenticate or not
+     * @param array        $headers  additional headers
      *
      * @return array
      */
-    public function put(string $url, array $data, string $profile, bool $withAuth, array $headers = []): array;
+    public function put(string $url, $data, string $profile, bool $withAuth, array $headers = []): array;
 
     /**
      * Send a patch request.
      *
-     * @param string $url      the url where to send the request
-     * @param array  $data     the data to be sent
-     * @param string $profile  the used profile
-     * @param bool   $withAuth authenticate or not
-     * @param array  $headers  additional headers
+     * @param string       $url      the url where to send the request
+     * @param array|string $data     the data to be sent
+     * @param string       $profile  the used profile
+     * @param bool         $withAuth authenticate or not
+     * @param array        $headers  additional headers
      *
      * @return array
      */
-    public function patch(string $url, array $data, string $profile, bool $withAuth, array $headers = []): array;
+    public function patch(string $url, $data, string $profile, bool $withAuth, array $headers = []): array;
 
     /**
      * Send a delete request.
      *
-     * @param string $url      the url where to send the request
-     * @param array  $data     the data to be sent
-     * @param string $profile  the used profile
-     * @param bool   $withAuth authenticate or not
-     * @param array  $headers  additional headers
+     * @param string       $url      the url where to send the request
+     * @param array|string $data     the data to be sent
+     * @param string       $profile  the used profile
+     * @param bool         $withAuth authenticate or not
+     * @param array        $headers  additional headers
      *
      * @return array
      */
-    public function delete(string $url, array $data, string $profile, bool $withAuth, array $headers = []): array;
+    public function delete(string $url, $data, string $profile, bool $withAuth, array $headers = []): array;
 }

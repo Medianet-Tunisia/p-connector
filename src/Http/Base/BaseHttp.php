@@ -19,7 +19,7 @@ abstract class BaseHttp implements Http
         $this->authManager = $withAuth ? new AuthManager() : null;
     }
 
-    public function send(string $url, array $data, string $method, string $profile, bool $withAuth, array $headers = []): array
+    public function send(string $url, $data, string $method, string $profile, bool $withAuth, array $headers = []): array
     {
         switch (strtoupper($method)) {
             case 'POST':
@@ -34,10 +34,8 @@ abstract class BaseHttp implements Http
                 return $this->delete($url, $data, $profile, $withAuth, $headers);
 
             default:
-                throw new \InvalidArgumentException(
-                    'Unrecognized "'.strtoupper($method).'" method,
-                        supported methods are: "POST", "GET", "PUT" , "PATCH" and "DELETE"'
-                );
+                throw new \InvalidArgumentException('Unrecognized "'.strtoupper($method).'" method,
+                        supported methods are: "POST", "GET", "PUT" , "PATCH" and "DELETE"');
         }
     }
 

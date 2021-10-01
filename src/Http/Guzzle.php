@@ -20,11 +20,15 @@ class Guzzle extends BaseHttp
         $this->client = new Client();
     }
 
-    public function post(string $url, array $data, string $profile, bool $withAuth, $headers = []): array
+    public function post(string $url, $data, string $profile, bool $withAuth, $headers = []): array
     {
         try {
             $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
-            $payload[config('p-connector.profiles.'.$profile.'.request.post_data', config('p-connector.request.post_data', 'json'))] = $data;
+            if ('array' === gettype($data)) {
+                $payload[config('p-connector.profiles.'.$profile.'.request.post_data', config('p-connector.request.post_data', 'json'))] = $data;
+            } else {
+                $payload['body'] = $data;
+            }
 
             return $this->parser($url, 'POST', $payload, $this->client->post($url, $payload));
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
@@ -32,11 +36,15 @@ class Guzzle extends BaseHttp
         }
     }
 
-    public function get(string $url, array $data, string $profile, bool $withAuth, $headers = []): array
+    public function get(string $url, $data, string $profile, bool $withAuth, $headers = []): array
     {
         try {
             $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
-            $payload['query'] = $data;
+            if ('array' === gettype($data)) {
+                $payload['query'] = $data;
+            } else {
+                $payload['body'] = $data;
+            }
 
             return $this->parser($url, 'GET', $payload, $this->client->get($url, $payload));
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
@@ -44,11 +52,15 @@ class Guzzle extends BaseHttp
         }
     }
 
-    public function put(string $url, array $data, string $profile, bool $withAuth, $headers = []): array
+    public function put(string $url, $data, string $profile, bool $withAuth, $headers = []): array
     {
         try {
             $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
-            $payload[config('p-connector.profiles.'.$profile.'.request.post_data', config('p-connector.request.post_data', 'json'))] = $data;
+            if ('array' === gettype($data)) {
+                $payload[config('p-connector.profiles.'.$profile.'.request.post_data', config('p-connector.request.post_data', 'json'))] = $data;
+            } else {
+                $payload['body'] = $data;
+            }
 
             return $this->parser($url, 'PUT', $payload, $this->client->put($url, $payload));
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
@@ -56,11 +68,15 @@ class Guzzle extends BaseHttp
         }
     }
 
-    public function patch(string $url, array $data, string $profile, bool $withAuth, $headers = []): array
+    public function patch(string $url, $data, string $profile, bool $withAuth, $headers = []): array
     {
         try {
             $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
-            $payload[config('p-connector.profiles.'.$profile.'.request.post_data', config('p-connector.request.post_data', 'json'))] = $data;
+            if ('array' === gettype($data)) {
+                $payload[config('p-connector.profiles.'.$profile.'.request.post_data', config('p-connector.request.post_data', 'json'))] = $data;
+            } else {
+                $payload['body'] = $data;
+            }
 
             return $this->parser($url, 'PATCH', $payload, $this->client->put($url, $payload));
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
@@ -68,11 +84,15 @@ class Guzzle extends BaseHttp
         }
     }
 
-    public function delete(string $url, array $data, string $profile, bool $withAuth, $headers = []): array
+    public function delete(string $url, $data, string $profile, bool $withAuth, $headers = []): array
     {
         try {
             $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
-            $payload[config('p-connector.profiles.'.$profile.'.request.post_data', config('p-connector.request.post_data', 'json'))] = $data;
+            if ('array' === gettype($data)) {
+                $payload[config('p-connector.profiles.'.$profile.'.request.post_data', config('p-connector.request.post_data', 'json'))] = $data;
+            } else {
+                $payload['body'] = $data;
+            }
 
             return $this->parser($url, 'DELETE', $payload, $this->client->delete($url, $payload));
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
