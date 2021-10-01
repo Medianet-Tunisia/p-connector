@@ -75,6 +75,14 @@ trait Utils
     }
 
     /**
+     * Dump and die the \MedianetDev\PConnector\PConnector using laravel dd function.
+     */
+    public function dd()
+    {
+        dd($this);
+    }
+
+    /**
      * Get attribute from the response.
      *
      * @param string $attribute The attribute path, for nested attributes use the "." separator [EX: "profile.name"]
@@ -84,18 +92,24 @@ trait Utils
      */
     public function getAttribute($attribute, $default = null)
     {
-        if ($this->status === 0) {
+        if (0 === $this->status) {
             return $default;
         }
         if ('object' !== gettype($this->response['body'])) {
-            throw new \BadMethodCallException(
-                'You can use the get() function only if you are parsing the response as object, your response body type is: '.
-                gettype($this->response['body']).
-                '. You can set in the config with the "decode_response" key.'
-            );
+            throw new \BadMethodCallException('You can use the get() function only if you are parsing the response as object, your response body type is: '.gettype($this->response['body']).'. You can set in the config with the "decode_response" key.');
         }
 
         return _get($this->response['body'], explode('.', $attribute), $default);
+    }
+
+    /**
+     * Check if the response code is equal to.
+     *
+     * @return bool
+     */
+    public function responseCodeIs(int $code)
+    {
+        return $this->response['status_code'] === $code;
     }
 
     /**
@@ -105,17 +119,47 @@ trait Utils
      */
     public function responseCodeNot(int $code)
     {
-        return $this->response['status_code'] !== $code;
+        return ! $this->responseCodeNot($code);
     }
 
     /**
-     * Check if the response code is not in.
+     * Check if the response code is in the given array.
+     *
+     * @return bool
+     */
+    public function responseCodeIn(array $code)
+    {
+        return in_array($this->response['status_code'], $code);
+    }
+
+    /**
+     * Check if the response code is not in the given array.
      *
      * @return bool
      */
     public function responseCodeNotIn(array $code)
     {
-        return ! in_array($this->response['status_code'], $code);
+        return ! $this->responseCodeIn($code);
+    }
+
+    /**
+     * Check if the response code is in [200, 201, 202, 204] range.
+     *
+     * @return bool
+     */
+    public function responseOK()
+    {
+        return $this->responseCodeIn([200, 201, 202, 204]);
+    }
+
+    /**
+     * Check if the response code is not in [200, 201, 202, 204] range.
+     *
+     * @return bool
+     */
+    public function responseNOK()
+    {
+        return ! $this->responseOK();
     }
 
     public function __get($name)

@@ -222,6 +222,14 @@ $demo = PConnector::get('posts/1')->getAttribute('author.name', 'Unknown author'
 ```
 
 Response status code checks:
+- `function responseCodeIs(int $code): bool`
+- `function responseCodeNot(int $code): bool`
+- `function responseCodeIn(array $codes): bool`
+- `function responseCodeNotIn(array $codes): bool`
+- `function responseOK(): bool`
+- `function responseNOK(): bool`
+
+> Example:
 ```php
 use MedianetDev\PConnector\Facade\PConnector;
 
@@ -267,11 +275,12 @@ $demo = PConnector::withLog()->get('posts/1');
 ```
 
 #### Debugging
-You can debug the **PConnector** object using the `dump()` method.
+You can debug the **PConnector** object using the `dump()` or the `dd()` method.
 ```php
 use MedianetDev\PConnector\Facade\PConnector;
 
 $demo = PConnector::get('posts/1')->dump();
+$demo = PConnector::get('posts/1')->dd();
 ```
 
 ### Changelog
