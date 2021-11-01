@@ -4,10 +4,9 @@ if (! function_exists('_get')) {
     /**
      * Get attribute value from a given object.
      *
-     * @param object $object    The object
-     * @param array  $attribute The attribute name must be an array to support nesting [EX: "profile.name"]
-     * @param mixed  $default   The fallback value if the attribute is not found
-     *
+     * @param  object  $object  The object
+     * @param  array  $attribute  The attribute name must be an array to support nesting [EX: "profile.name"]
+     * @param  mixed  $default  The fallback value if the attribute is not found
      * @return mixed
      */
     function _get(object $object, array $attribute, $default)
@@ -30,16 +29,15 @@ if (! function_exists('build_url')) {
     /**
      * Build the url of the gateway from settings for the desired profile.
      *
-     * @param string $path    The path
-     * @param string $profile The profile name
-     * @param string $url The new url
-     *
+     * @param  string  $path  The path
+     * @param  string  $profile  The profile name
+     * @param  string  $url  The new url
      * @return string
      */
     function build_url(string $path, string $profile, string $url = null): string
     {
         return (string) (
-            $url ? (endsWith($url, '/') ? $url : $url.'/')  : config('p-connector.profiles.'.$profile.'.protocol', 'http')
+            $url ? (endsWith($url, '/') ? $url : $url.'/') : config('p-connector.profiles.'.$profile.'.protocol', 'http')
             .'://'.config('p-connector.profiles.'.$profile.'.host', 'localhost')
             .':'.config('p-connector.profiles.'.$profile.'.port', 80)
             .(startsWith(config('p-connector.profiles.'.$profile.'.prefix', ''), '/') ? '' : '/')

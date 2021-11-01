@@ -22,8 +22,7 @@ class AuthManager
     /**
      * Delete token for a profile.
      *
-     * @param string $profile
-     *
+     * @param  string  $profile
      * @return void
      */
     public static function deleteTokenFor($profile)
@@ -39,8 +38,7 @@ class AuthManager
     /**
      * Get the authentication header for a profile.
      *
-     * @param string $profile
-     *
+     * @param  string  $profile
      * @return array
      */
     public function getAuthenticationHeader($profile)

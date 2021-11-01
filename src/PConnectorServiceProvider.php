@@ -70,7 +70,7 @@ class PConnectorServiceProvider extends ServiceProvider
     /**
      * Returns existing migration file if found, else uses the current timestamp.
      *
-     * @param Filesystem $filesystem
+     * @param  Filesystem  $filesystem
      * @return string
      */
     protected function getMigrationFileName(Filesystem $filesystem): string

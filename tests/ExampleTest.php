@@ -2,12 +2,11 @@
 
 namespace MedianetDev\PConnector\Tests;
 
-use Orchestra\Testbench\TestCase;
 use MedianetDev\PConnector\PConnectorServiceProvider;
+use Orchestra\Testbench\TestCase;
 
 class ExampleTest extends TestCase
 {
-
     protected function getPackageProviders($app)
     {
         return [PConnectorServiceProvider::class];
