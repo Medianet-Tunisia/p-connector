@@ -90,11 +90,12 @@ trait Utils
      */
     public function getAttribute($attribute, $default = null)
     {
-        if (0 === $this->status) {
-            return $default;
-        }
-        if ('object' !== gettype($this->response['body'])) {
+        if (config('p-connector.'.$this->profile.'.decode_response', config('p-connector.decode_response')) === 'object') {
             throw new \BadMethodCallException('You can use the get() function only if you are parsing the response as object, your response body type is: '.gettype($this->response['body']).'. You can set in the config with the "decode_response" key.');
+        }
+
+        if (0 === $this->status || 'object' !== gettype($this->response['body'])) {
+            return $default;
         }
 
         return _get($this->response['body'], explode('.', $attribute), $default);
