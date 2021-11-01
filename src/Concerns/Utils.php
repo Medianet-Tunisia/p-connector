@@ -117,7 +117,7 @@ trait Utils
      */
     public function responseCodeNot(int $code)
     {
-        return ! $this->responseCodeNot($code);
+        return ! $this->responseCodeIs($code);
     }
 
     /**
