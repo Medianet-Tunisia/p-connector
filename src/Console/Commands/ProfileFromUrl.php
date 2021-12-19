@@ -11,7 +11,7 @@ class ProfileFromUrl extends Command
      *
      * @var string
      */
-    protected $signature = 'pconnector:generate {url : URL api} {name? : Name of profile}';
+    protected $signature = 'pconnector:generate {url : URL api} {profile? : Name of profile}';
 
     /**
      * The console command description.
@@ -32,6 +32,7 @@ class ProfileFromUrl extends Command
 
         $url = $this->argument('url');
 
+        
         // Validate the Url
         if (filter_var($url, FILTER_VALIDATE_URL,FILTER_FLAG_PATH_REQUIRED) === FALSE) {
             return $this->error('Not a valid URL!');
@@ -41,50 +42,57 @@ class ProfileFromUrl extends Command
         \Artisan::call('vendor:publish', ['--provider' => 'MedianetDev\PConnector\PConnectorServiceProvider', '--tag' => 'config']);
 
         // Extract profile from url
-        $profile = parse_url($url);
+        $gateway = parse_url($url);
 
         $profiles = config('p-connector.profiles');
+        $profile_name = $this->argument('profile') ?? 'profile';
+        
+        // Check existing profile name
+        if(isset($profiles[$profile_name])){
+            return $this->error('Please check your profile name');
+        }
+
+        // Merge profiles
         $profiles = $profiles +
         [
-            $this->argument('name') ?? 'profile' => [
-                'protocol' => $profile['scheme'] ?? 'http',
-                'host' => $profile['host'] ?? 'http',
-                'port' => $profile['port'] ?? 80,
-                'prefix' => $profile['path'] ?? '/',
+            $profile_name => [
+                'protocol' => $gateway['scheme'] ?? 'http',
+                'host' => $gateway['host'] ?? 'foo.bar',
+                'port' => $gateway['port'] ?? 80,
+                'prefix' => $gateway['path'] ?? '/',
             ],
         ];
 
         // Add profile into config
         $path = config_path('p-connector.php');
-        if (file_exists($path)) {
-            file_put_contents($path, 
-                str_replace(
-                    json_encode(config('p-connector.profiles')), json_encode($profiles), file_get_contents($path)
-                )
-            );
-        }
-
-
-        // // Another Method
-        // $config = config('p-connector');
-        // $config['profiles'] = $config['profiles'] +
-        // [
-        //     $this->argument('name') ?? 'profile' => [
-        //         'protocol' => $profile['scheme'] ?? 'http',
-        //         'host' => $profile['host'] ?? 'http',
-        //         'port' => $profile['port'] ?? 80,
-        //         'prefix' => $profile['path'] ?? '/',
-        //     ],
-        // ];
-
-        // // Add profile into config
-        // $path = config_path('p-connector.php');
-
-        // $string = '<?php return' . var_export( $config, true );
-        // file_put_contents($path, $string);
+        config(['p-connector.profiles' => $profiles]);
         
+        // Set new Config
+        if (file_exists($path)) {
+            file_put_contents($path, "<?php \n return \n {$this->var_export_format(config('p-connector'))};");
+        }
 
         $this->info('Profile added successfully.');
     }
-    
+
+    private function var_export_format($var, $indent="") {
+        switch (gettype($var)) {
+            case "string":
+                return '"' . addcslashes($var, "\\\$\"\r\n\t\v\f") . '"';
+            case "array":
+                $indexed = array_keys($var) === range(0, count($var) - 1);
+                $r = [];
+                foreach ($var as $key => $value) {
+                    $r[] = "$indent    "
+                         . ($indexed ? "" : $this->var_export_format($key) . " => ")
+                         . $this->var_export_format($value, "$indent    ");
+                }
+                return "[\n" . implode(",\n", $r) . "\n" . $indent . "]";
+            case "boolean":
+                return $var ? "TRUE" : "FALSE";
+            case 'integer':  case 'double': return $var;
+            default:
+                return var_export($var, TRUE);
+        }
+    }
 }
