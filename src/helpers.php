@@ -37,7 +37,7 @@ if (! function_exists('build_url')) {
     function build_url(string $path, string $profile, string $url = null): string
     {
         return (string) (
-            $url ? (endsWith($url, '/') ? $url : $url.'/') : config('p-connector.profiles.'.$profile.'.protocol', 'http')
+            $url ? (endsWith($url, '/') ? $url : ($path != '' ? $url.'/' : $url)) : config('p-connector.profiles.'.$profile.'.protocol', 'http')
             .'://'.config('p-connector.profiles.'.$profile.'.host', 'localhost')
             .':'.config('p-connector.profiles.'.$profile.'.port', 80)
             .(startsWith(config('p-connector.profiles.'.$profile.'.prefix', ''), '/') ? '' : '/')
