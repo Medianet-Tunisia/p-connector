@@ -8,16 +8,6 @@ use Illuminate\Support\ServiceProvider;
 
 class PConnectorServiceProvider extends ServiceProvider
 {
-
-    /**
-     * The Artisan commands provided.
-     *
-     * @var array
-     */
-    protected $commands = [
-        \MedianetDev\PConnector\Console\Commands\ProfileFromUrl::class,
-    ];
-
     /**
      * Bootstrap the application services.
      */
@@ -75,9 +65,6 @@ class PConnectorServiceProvider extends ServiceProvider
 
             return new PConnector($httpClient);
         });
-
-        // Register the artisan commands
-        $this->commands($this->commands);
     }
 
     /**
