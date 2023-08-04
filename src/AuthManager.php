@@ -34,7 +34,7 @@ class AuthManager
                         if ($value['gateway_profile'] === $profile) {
                             $value['token'] = null;
                         }
-                    };
+                    }
                 }
                 session()->save();
             } else {
@@ -97,13 +97,13 @@ class AuthManager
                             return $token->token;
                         }
                     }
-                };
+                }
             }
         } else {
             $token = app('db')->table(config('p-connector.table', 'p_connector'))->where('gateway_profile', $profile)->first();
 
-            if ($token && !empty($token->token)) {
-                return $token->token;
+            if ($token && !empty($token['token'])) {
+                return $token['token'];
             }
         }
 
@@ -135,7 +135,7 @@ class AuthManager
             if (config('p-connector.session')) {
                 $data = [
                     'gateway_profile' => $profile,
-                    'token' => $token
+                    'token' => $token,
                 ];
 
                 if (session()->has(config('p-connector.session_name'))) {
@@ -153,7 +153,7 @@ class AuthManager
                     }
                 } else {
                     session()->put([
-                        config('p-connector.session_name') => [$data]
+                        config('p-connector.session_name') => [$data],
                     ]);
                 }
 
