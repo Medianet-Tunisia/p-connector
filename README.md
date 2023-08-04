@@ -161,15 +161,6 @@ $demo = PConnector::profile('demo')->withoutAuth()->get('posts/1');
     'post_data' => 'json',
 ],
 ```
-
-##### Generate a profile from url
-You can generate a profile from url via the command line by typing :
-
-```php
-php artisan pconnector:generate http://foo.bar:80/prefix [gateway_name]
-```
-
-
 ##### Localization
 Send **Accept-Language** header when needed:
 ```php
