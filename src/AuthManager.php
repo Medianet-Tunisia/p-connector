@@ -27,7 +27,7 @@ class AuthManager
      */
     public static function deleteTokenFor($profile)
     {
-        if ('basic' !== config('p-connector.profiles.' . $profile . '.auth.auth_method', config('p-connector.auth.auth_method', 'basic'))) {
+        if ('basic' !== config('p-connector.profiles.'.$profile.'.auth.auth_method', config('p-connector.auth.auth_method', 'basic'))) {
             if (config('p-connector.session')) {
                 if (session()->has(config('p-connector.session_name'))) {
                     foreach (session()->get(config('p-connector.session_name')) as $key => $value) {
@@ -55,21 +55,21 @@ class AuthManager
     public function getAuthenticationHeader($profile)
     {
         $token = $this->getToken($profile);
-        $authMethod = config('p-connector.profiles.' . $profile . '.auth.auth_method', config('p-connector.auth.auth_method', 'basic'));
+        $authMethod = config('p-connector.profiles.'.$profile.'.auth.auth_method', config('p-connector.auth.auth_method', 'basic'));
 
         switch ($authMethod) {
             case 'api_key':
-                return [config('p-connector.profiles.' . $profile . '.auth.api_key', config(
+                return [config('p-connector.profiles.'.$profile.'.auth.api_key', config(
                     'p-connector.auth.api_key',
                     'X-AUTH-TOKEN'
                 )) => $token];
             case 'basic':
-                return ['Authorization' => 'Basic ' . $token];
+                return ['Authorization' => 'Basic '.$token];
             case 'bearer':
-                return ['Authorization' => 'Bearer ' . $token];
+                return ['Authorization' => 'Bearer '.$token];
 
             default:
-                throw new InvalidArgumentException('Invalid method "' . $authMethod . '".');
+                throw new InvalidArgumentException('Invalid method "'.$authMethod.'".');
         }
     }
 
@@ -80,20 +80,20 @@ class AuthManager
      */
     private function getToken($profile)
     {
-        if ('basic' === config('p-connector.profiles.' . $profile . '.auth.auth_method', config('p-connector.auth.auth_method', 'basic'))) {
-            $auth = config('p-connector.profiles.' . $profile . '.auth.credentials', config('p-connector.auth.credentials', []));
-            if (!array_key_exists('username', $auth) || !array_key_exists('password', $auth)) {
+        if ('basic' === config('p-connector.profiles.'.$profile.'.auth.auth_method', config('p-connector.auth.auth_method', 'basic'))) {
+            $auth = config('p-connector.profiles.'.$profile.'.auth.credentials', config('p-connector.auth.credentials', []));
+            if (! array_key_exists('username', $auth) || ! array_key_exists('password', $auth)) {
                 throw new InvalidArgumentException("config('p-connector.profiles.$profile.auth.credentials') array must have a username and password keys.");
             }
 
-            return base64_encode($auth['username'] . ':' . $auth['password']);
+            return base64_encode($auth['username'].':'.$auth['password']);
         }
 
         if (config('p-connector.session')) {
             if (session()->has(config('p-connector.session_name'))) {
                 foreach (session()->get(config('p-connector.session_name')) as $token) {
                     if ($token['gateway_profile'] === $profile) {
-                        if ($token && !empty($token->token)) {
+                        if ($token && ! empty($token->token)) {
                             return $token->token;
                         }
                     }
@@ -102,11 +102,10 @@ class AuthManager
         } else {
             $token = app('db')->table(config('p-connector.table', 'p_connector'))->where('gateway_profile', $profile)->first();
 
-            if ($token && !empty($token['token'])) {
+            if ($token && ! empty($token['token'])) {
                 return $token['token'];
             }
         }
-
 
         return $this->loginToGateway($profile);
     }
@@ -119,17 +118,17 @@ class AuthManager
     private function loginToGateway($profile)
     {
         $result = $this->httpClient->send(
-            build_url(config('p-connector.profiles.' . $profile . '.auth.login_path', config('p-connector.auth.login_path', 'login')), $profile),
-            config('p-connector.profiles.' . $profile . '.auth.credentials', config('p-connector.auth.credentials', [])),
-            strtoupper(config('p-connector.profiles.' . $profile . '.auth.login_http_method', config('p-connector.auth.login_http_method', 'POST'))),
+            build_url(config('p-connector.profiles.'.$profile.'.auth.login_path', config('p-connector.auth.login_path', 'login')), $profile),
+            config('p-connector.profiles.'.$profile.'.auth.credentials', config('p-connector.auth.credentials', [])),
+            strtoupper(config('p-connector.profiles.'.$profile.'.auth.login_http_method', config('p-connector.auth.login_http_method', 'POST'))),
             $profile,
             false
         );
 
-        if ($result['status'] && in_array($result['response']['status_code'], config('p-connector.profiles.' . $profile . '.auth.success_login_code', config('p-connector.auth.success_login_code', [])))) {
-            $token = _get(json_decode($result['response']['body']), explode('.', config('p-connector.profiles.' . $profile . '.auth.token_path', config('p-connector.auth.token_path', 'token'))), '');
+        if ($result['status'] && in_array($result['response']['status_code'], config('p-connector.profiles.'.$profile.'.auth.success_login_code', config('p-connector.auth.success_login_code', [])))) {
+            $token = _get(json_decode($result['response']['body']), explode('.', config('p-connector.profiles.'.$profile.'.auth.token_path', config('p-connector.auth.token_path', 'token'))), '');
             if ('string' !== gettype($token)) {
-                throw new InvalidArgumentException('The returned token is not of type string (type: "' . gettype($token) . '").');
+                throw new InvalidArgumentException('The returned token is not of type string (type: "'.gettype($token).'").');
             }
 
             if (config('p-connector.session')) {
@@ -145,7 +144,7 @@ class AuthManager
                             $index = $key;
                             break;
                         }
-                    };
+                    }
                     if ($index != -1) {
                         session()->get(config('p-connector.session_name'))[$index] = $token;
                     } else {
