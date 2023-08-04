@@ -22,6 +22,10 @@ return [
     'http_client' => \MedianetDev\PConnector\Http\Guzzle::class,
     // How to parse the response, string, array or object parsing (you can make an exception with objectResponse() and htmlResponse() arrayResponse() methods)
     'decode_response' => 'object', // [AAPS]
+    // choose whether you use the session or not (stores the token in a session)
+    'session' => false,
+    // The PConnector session
+    'session_name' => 'p_connector',
     // The authentication settings
     'auth' => [ // [AAPS]
         // Whether to use authentication by default or not (you can make an exception with withAuth() and withoutAuth() methods)
