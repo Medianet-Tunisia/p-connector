@@ -102,8 +102,8 @@ class AuthManager
         } else {
             $token = app('db')->table(config('p-connector.table', 'p_connector'))->where('gateway_profile', $profile)->first();
 
-            if ($token && !empty($token->token)) {
-                return $token->token;
+            if ($token && !empty($token['token'])) {
+                return $token['token'];
             }
         }
 
