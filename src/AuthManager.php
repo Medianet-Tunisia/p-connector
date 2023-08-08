@@ -93,8 +93,8 @@ class AuthManager
             if (session()->has(config('p-connector.session_name'))) {
                 foreach (session()->get(config('p-connector.session_name')) as $token) {
                     if ($token['gateway_profile'] === $profile) {
-                        if ($token && ! empty($token->token)) {
-                            return $token->token;
+                        if ($token && ! empty($token['token'])) {
+                            return $token['token'];
                         }
                     }
                 }
@@ -102,8 +102,8 @@ class AuthManager
         } else {
             $token = app('db')->table(config('p-connector.table', 'p_connector'))->where('gateway_profile', $profile)->first();
 
-            if ($token && ! empty($token['token'])) {
-                return $token['token'];
+            if ($token && ! empty($token->token)) {
+                return $token->token;
             }
         }
 
