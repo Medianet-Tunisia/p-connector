@@ -122,7 +122,7 @@ trait Requests
 
     public function getRequestUrl()
     {
-        return $this->request['rul'];
+        return $this->request['url'];
     }
 
     public function getRequestMethod()
