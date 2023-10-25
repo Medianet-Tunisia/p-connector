@@ -28,7 +28,15 @@ class AuthManager
     public static function deleteTokenFor($profile)
     {
         if ('basic' !== config('p-connector.profiles.'.$profile.'.auth.auth_method', config('p-connector.auth.auth_method', 'basic'))) {
-            if (config('p-connector.session')) {
+            if (config('p-connector.profiles.'.$profile.'.session')) {
+                if (session()->has('p-connector.session_'.$profile)) {
+                    $value = session()->get('p-connector.session_'.$profile);
+                    $value['token'] = null;
+
+                    session()->put(['p-connector.session_'.$profile => $data]);
+                }
+                session()->save();
+            } elseif (config('p-connector.session')) {
                 if (session()->has(config('p-connector.session_name'))) {
                     foreach (session()->get(config('p-connector.session_name')) as $key => $value) {
                         if ($value['gateway_profile'] === $profile) {
@@ -89,7 +97,15 @@ class AuthManager
             return base64_encode($auth['username'].':'.$auth['password']);
         }
 
-        if (config('p-connector.session')) {
+        if (config('p-connector.profiles.'.$profile.'.session')) {
+            if (session()->has('p-connector.session_'.$profile)) {
+                $token = session()->get('p-connector.session_'.$profile);
+
+                if ($token && ! empty($token['token'])) {
+                    return $token['token'];
+                }
+            }
+        } elseif (config('p-connector.session')) {
             if (session()->has(config('p-connector.session_name'))) {
                 foreach (session()->get(config('p-connector.session_name')) as $token) {
                     if ($token['gateway_profile'] === $profile) {
@@ -131,7 +147,16 @@ class AuthManager
                 throw new InvalidArgumentException('The returned token is not of type string (type: "'.gettype($token).'").');
             }
 
-            if (config('p-connector.session')) {
+            if (config('p-connector.profiles.'.$profile.'.session')) {
+                $data = [
+                    'gateway_profile' => $profile,
+                    'token' => $token,
+                ];
+
+                session()->put(['p-connector.session_'.$profile => $data]);
+
+                session()->save();
+            } elseif (config('p-connector.session')) {
                 $data = [
                     'gateway_profile' => $profile,
                     'token' => $token,
