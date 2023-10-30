@@ -98,8 +98,8 @@ class AuthManager
         }
 
         if (config('p-connector.profiles.'.$profile.'.session')) {
-            if (session()->has('p-connector.session_'. $profile)) {
-                $token = session()->get('p-connector.session_'. $profile);
+            if (session()->has('p-connector.session_'.$profile)) {
+                $token = session()->get('p-connector.session_'.$profile);
 
                 if ($token && ! empty($token['token'])) {
                     return $token['token'];
