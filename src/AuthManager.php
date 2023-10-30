@@ -33,7 +33,7 @@ class AuthManager
                     $value = session()->get('p-connector.session_'.$profile);
                     $value['token'] = null;
 
-                    session()->put(['p-connector.session_'.$profile => $data]);
+                    session()->put(['p-connector.session_'.$profile => $value]);
                 }
                 session()->save();
             } elseif (config('p-connector.session')) {
