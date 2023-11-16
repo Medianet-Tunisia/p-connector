@@ -46,7 +46,6 @@ class Guzzle extends BaseHttp
                 } else {
                     $payload['query'] = $data;
                 }
-
             } else {
                 $payload['body'] = $data;
             }
