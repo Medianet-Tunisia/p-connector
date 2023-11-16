@@ -39,6 +39,13 @@ trait Configurations
      */
     private $url;
 
+    /**
+     * @var bool
+     *
+     * Should send data in json with get METHOD
+     */
+    private $withJson;
+
     private function updateSettings($profile)
     {
         $this->withAuthentication = config('p-connector.profiles.'.$profile.'.auth.authenticate_by_default', config('p-connector.auth.authenticate_by_default', false));
@@ -110,6 +117,18 @@ trait Configurations
     public function withLog()
     {
         $this->allowDebugging = true;
+
+        return $this;
+    }
+
+    /**
+     * Log this request.
+     *
+     * @return \MedianetDev\PConnector\PConnector
+     */
+    public function withJson()
+    {
+        $this->withJson = true;
 
         return $this;
     }
