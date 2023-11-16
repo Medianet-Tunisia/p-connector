@@ -25,7 +25,7 @@ abstract class BaseHttp implements Http
             case 'POST':
                 return $this->post($url, $data, $profile, $withAuth, $headers);
             case 'GET':
-                return $this->get($url, $data, $profile, $withAuth, $headers,$withJson);
+                return $this->get($url, $data, $profile, $withAuth, $headers, $withJson);
             case 'PUT':
                 return $this->put($url, $data, $profile, $withAuth, $headers);
             case 'PATCH':

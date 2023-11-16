@@ -41,9 +41,9 @@ class Guzzle extends BaseHttp
         try {
             $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
             if ('array' === gettype($data)) {
-                if($withJson){
+                if ($withJson) {
                     $payload['json'] = $data;
-                }else{
+                } else {
                     $payload['query'] = $data;
                 }
 
