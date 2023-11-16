@@ -36,12 +36,16 @@ class Guzzle extends BaseHttp
         }
     }
 
-    public function get(string $url, $data, string $profile, bool $withAuth, $headers = []): array
+    public function get(string $url, $data, string $profile, bool $withAuth, $headers = [], bool $withJson = false): array
     {
         try {
             $payload = $this->prepareGuzzlePayload($profile, $withAuth, $headers);
             if ('array' === gettype($data)) {
-                $payload['query'] = $data;
+                if ($withJson) {
+                    $payload['json'] = $data;
+                } else {
+                    $payload['query'] = $data;
+                }
             } else {
                 $payload['body'] = $data;
             }
