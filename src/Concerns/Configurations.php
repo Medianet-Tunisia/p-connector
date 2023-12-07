@@ -44,7 +44,7 @@ trait Configurations
      *
      * Should send data in json with get METHOD
      */
-    private $withJson;
+    private $withJson = false;
 
     private function updateSettings($profile)
     {
