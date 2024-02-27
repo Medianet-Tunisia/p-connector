@@ -35,6 +35,8 @@ return [
         'auth_method' => 'bearer',
         // If the api_key method is use then you SHOULD provide an api_key key
         // 'api_key' => 'X-AUTH-TOKEN',
+        //The header used to login
+        'headers' => [],
         // The path of the login
         'login_path' => 'login',
         // The http method used to login
