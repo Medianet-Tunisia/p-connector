@@ -130,6 +130,18 @@ for the desired profile or for all the profiles.
     'token_path' => 'token',
 ],
 ```
+You can configure the authentication settings for the desired profile by adding the auth array in the profile config.
+
+```php
+'profiles' => [
+    'demo' => [
+        ...,
+        'auth' => [ // Add this section for custom auth settings
+            // Authentication settings specific to this profile
+        ],
+    ],
+],
+```
 If for some reason you don't want to include authentication while sending some request, you can tell the PConnector like so:
 ```php
 use MedianetDev\PConnector\Facade\PConnector;
