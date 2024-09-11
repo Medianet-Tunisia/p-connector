@@ -139,7 +139,7 @@ class AuthManager
             strtoupper(config('p-connector.profiles.'.$profile.'.auth.login_http_method', config('p-connector.auth.login_http_method', 'POST'))),
             $profile,
             false,
-            config('p-connector.auth.headers', []),
+            config('p-connector.profiles.'.$profile.'.auth.headers', config('p-connector.auth.headers', [])),
         );
 
         if ($result['status'] && in_array($result['response']['status_code'], config('p-connector.profiles.'.$profile.'.auth.success_login_code', config('p-connector.auth.success_login_code', [])))) {
