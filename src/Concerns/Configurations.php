@@ -78,7 +78,7 @@ trait Configurations
      * @param  string  $locale  [optional] The locale will default to the app.locale if not provided
      * @return \MedianetDev\PConnector\PConnector
      */
-    public function lang(string $locale = null)
+    public function lang(?string $locale = null)
     {
         $this->withHeader('Accept-Language', $locale ?? app()->getLocale());
 

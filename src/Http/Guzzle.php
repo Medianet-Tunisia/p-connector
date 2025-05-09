@@ -104,7 +104,7 @@ class Guzzle extends BaseHttp
         }
     }
 
-    protected function parser(string $url, string $method, array $payload, $response, bool $status = true, string $errorMessage = null): array
+    protected function parser(string $url, string $method, array $payload, $response, bool $status = true, ?string $errorMessage = null): array
     {
         $result['status'] = $status;
         $result['request'] = [

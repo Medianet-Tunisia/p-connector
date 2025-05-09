@@ -50,5 +50,5 @@ abstract class BaseHttp implements Http
      * @param  string  $errorMessage
      * @return array
      */
-    abstract protected function parser(string $url, string $method, array $payload, $response, bool $status = true, string $errorMessage = null): array;
+    abstract protected function parser(string $url, string $method, array $payload, $response, bool $status = true, ?string $errorMessage = null): array;
 }
