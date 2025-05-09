@@ -66,6 +66,9 @@ return [
         'timeout' => 3,
         // The data type; json, form-data, ...
         'post_data' => 'json',
+
+        // Verify the SSL certificate or not
+        'verify' => true,
     ],
     // Log requests & responses to log files or not (you can make an exception with withLog() and withoutLog() methods)
     'log' => false, // [AAPS]

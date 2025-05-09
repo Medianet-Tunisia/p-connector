@@ -104,7 +104,7 @@ class Guzzle extends BaseHttp
         }
     }
 
-    protected function parser(string $url, string $method, array $payload, $response, bool $status = true, string $errorMessage = null): array
+    protected function parser(string $url, string $method, array $payload, $response, bool $status = true, ?string $errorMessage = null): array
     {
         $result['status'] = $status;
         $result['request'] = [
@@ -160,6 +160,10 @@ class Guzzle extends BaseHttp
         $payload['timeout'] = config(
             'p-connector.profiles.'.$profile.'.request.timeout',
             config('p-connector.request.timeout', 3)
+        );
+        $payload['verify'] = config(
+            'p-connector.profiles.'.$profile.'.request.verify',
+            config('p-connector.request.verify', true)
         );
 
         return $payload;
