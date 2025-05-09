@@ -161,6 +161,10 @@ class Guzzle extends BaseHttp
             'p-connector.profiles.'.$profile.'.request.timeout',
             config('p-connector.request.timeout', 3)
         );
+        $payload['verify'] = config(
+            'p-connector.profiles.'.$profile.'.request.verify',
+            config('p-connector.request.verify', true)
+        );
 
         return $payload;
     }
