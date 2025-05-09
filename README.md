@@ -171,6 +171,9 @@ $demo = PConnector::profile('demo')->withoutAuth()->get('posts/1');
     'timeout' => 3,
     // The data type; json, form-data, ...
     'post_data' => 'json',
+
+    // Verify the SSL certificate or not
+    'verify' => false,
 ],
 ```
 ##### Localization
