@@ -34,7 +34,7 @@ if (! function_exists('build_url')) {
      * @param  string  $url  The new url
      * @return string
      */
-    function build_url(string $path, string $profile, string $url = null): string
+    function build_url(string $path, string $profile, ?string $url = null): string
     {
         return (string) (
             $url ? (endsWith($url, '/') ? $url : ($path != '' ? $url.'/' : $url)) : config('p-connector.profiles.'.$profile.'.protocol', 'http')
